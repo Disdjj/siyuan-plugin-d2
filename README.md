@@ -1,37 +1,39 @@
 # siyuan-plugin-d2
 
-在思源笔记里把 ` ```d2 ` 代码块显示成图，渲染结果与博客（blog.pdjjq.org）构建出来的一模一样。
+Render ` ```d2 ` code blocks in SiYuan as diagrams — pixel-identical to what your blog build produces.
 
-- 平时只显示图；点击图或右上角 ✎ 编辑源码，改完约 0.5 秒自动重渲染，光标移出或按 Esc 回到图
-- 布局固定 TALA、手绘风格；没写顶层 `direction` 时优先横向，横向放进正文字太小才改纵向
-- 语法错误时在图的位置显示 d2 报错
-- 暗色主题下整体反相
-- 代码块语言列表里加入 `d2`
+- Shows only the diagram by default; click it (or the ✎ button) to edit the source. It re-renders ~0.5s after you stop typing, and switches back when the caret leaves the block or you press Esc
+- TALA layout, sketch style. Without a top-level `direction`, it prefers horizontal and falls back to vertical only when the horizontal layout would be scaled down too much
+- Syntax errors are shown in place of the diagram
+- Inverted in dark mode
+- Adds `d2` to the code block language list
 
-笔记里保存的仍然只是 d2 源码（预览节点带 `protyle-custom`，思源保存时会跳过），
-导出 / 发布出去的还是普通 ` ```d2 ` 代码块。
+Only the d2 source is saved in your notes (the preview node carries `protyle-custom`, which SiYuan skips when saving), so exports and publishing still see a plain ` ```d2 ` block.
 
-## 渲染方式
+## Rendering engine
 
-| 端 | 方式 |
+| Where | Engine |
 |---|---|
-| 桌面端 | 本机 `d2` CLI（stdin/stdout，不落盘）。自动查找 `/opt/homebrew/bin`、`/usr/local/bin`、`~/go/bin`、`~/.local/bin`，也可在插件设置里指定路径 |
-| 桌面端找不到 CLI、手机、网页版 | 内置 `@d2lang/d2` WASM（含 TALA），首次渲染需加载约 11MB |
+| Desktop | Local `d2` CLI via stdin/stdout. Searches `/opt/homebrew/bin`, `/usr/local/bin`, `~/go/bin`, `~/.local/bin`, or a path set in the plugin settings |
+| Desktop without the CLI, mobile, browser | Bundled `@d2lang/d2` WASM (includes TALA), loads ~11MB on first render |
 
-两种方式在相同参数下输出逐字节相同。
+Both produce byte-identical SVG for the same parameters (`--layout=tala --sketch --pad=16 --theme=0`).
 
-**渲染参数与方向规则必须与博客仓库的 `scripts/render-d2.mjs` 保持一致**，改一边就要改另一边。
-
-## 开发
+## Development
 
 ```bash
 npm install
-npm run build      # 构建到 dist/
-npm run link       # 把 dist/ 软链接到 ~/SiYuan/data/plugins/siyuan-plugin-d2（SIYUAN_WORKSPACE 可覆盖）
-npm run dev        # 监听源码变化重新构建，之后在思源里重新加载插件
+npm run build      # build into dist/
+npm run package    # build and create package.zip for a GitHub Release
+npm run link       # symlink dist/ into ~/SiYuan/data/plugins/siyuan-plugin-d2 (override with SIYUAN_WORKSPACE)
+npm run dev        # rebuild on change, then reload the plugin in SiYuan
 ```
 
-## 已知限制
+## Known limitations
 
-- 依赖思源代码块的内部 DOM 结构（`.protyle-action` 首个子元素是语言名、其后紧跟 `.hljs`），思源大版本升级后需要回归验证
-- 思源自带的导出 PDF / HTML 只会显示源码
+- Relies on SiYuan's internal code block DOM (`.protyle-action` first child is the language, followed by `.hljs`); re-test after major SiYuan upgrades
+- SiYuan's built-in PDF / HTML export shows the source only
+
+## Credits
+
+The icon is derived from the [D2](https://github.com/terrastruct/d2) logo (© Terrastruct, MPL-2.0). Rendering uses the D2 CLI and `@d2lang/d2`.

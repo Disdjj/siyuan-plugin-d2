@@ -1,0 +1,16 @@
+classes: {
+  note: {style: {fill: "#ffffff"; stroke: "#888888"; border-radius: 16}}
+  plugin: {style: {fill: "#eaf2fc"; stroke: "#4a90e2"; border-radius: 6}}
+  out: {style: {fill: "#fdf6ec"; stroke: "#d89a3d"; border-radius: 6}}
+}
+siyuan: 思源笔记 {
+  style: {fill: "#fafafa"; stroke: "#dddddd"; border-radius: 8; font-size: 18}
+  code: "```d2 代码块" {class: note}
+  view: 渲染成图（TALA + 手绘） {class: plugin}
+  code -> view: 点击切换
+}
+blog: 博客 {
+  style: {fill: "#fafafa"; stroke: "#dddddd"; border-radius: 8; font-size: 18}
+  svg: 同样的 SVG {class: out}
+}
+siyuan.code -> blog.svg: 发布

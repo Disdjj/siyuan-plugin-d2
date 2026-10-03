@@ -4,18 +4,29 @@
   "url": "https://github.com/Disdjj/siyuan-plugin-d2",
   "version": "0.1.0",
   "minAppVersion": "3.8.0",
-  "backends": ["all"],
-  "frontends": ["all"],
+  "backends": [
+    "all"
+  ],
+  "frontends": [
+    "all"
+  ],
   "displayName": {
     "default": "D2 Diagram",
-    "zh_CN": "D2 图表"
+    "zh-CN": "D2 图表"
   },
   "description": {
-    "default": "Render ```d2 code blocks as diagrams (TALA layout, sketch style)",
-    "zh_CN": "把 d2 代码块渲染成图（TALA 布局、手绘风格），与博客显示一致"
+    "default": "Render d2 code blocks as diagrams (TALA layout, sketch style) — identical to your published blog",
+    "zh-CN": "把 d2 代码块渲染成图（TALA 布局、手绘风格），与发布到博客的图一模一样"
   },
   "readme": {
-    "default": "README.md"
+    "default": "README.md",
+    "zh-CN": "README.zh-CN.md"
   },
-  "keywords": ["d2", "diagram", "tala"]
+  "icon": "icon.png",
+  "preview": "preview.png",
+  "keywords": [
+    "d2",
+    "diagram",
+    "tala"
+  ]
 }
