@@ -1,0 +1,56 @@
+/*
+ * d2 预览样式
+ *
+ * 图按浅色主题渲染。暗色时与博客一样整体反相，hue-rotate 把强调色转回原色相。
+ * 思源的明暗是 <html data-theme-mode>，可以独立于系统设置，所以不依赖 prefers-color-scheme。
+ */
+
+/*
+ * 预览模式下隐藏源码；只靠预览节点自己的 data-mode 判断，不给块元素加任何属性。
+ * 思源高亮时会在 .hljs 上写内联 display（highlightRender.ts），必须用 !important 压过
+ */
+.code-block:has(> .d2-preview[data-mode="preview"]) > .hljs {
+  display: none !important;
+}
+
+.code-block:has(> .d2-preview[data-mode="source"]) > .d2-preview {
+  border-top: 1px dashed var(--b3-border-color);
+}
+
+.d2-preview {
+  padding: 8px;
+  overflow-x: auto;
+  cursor: pointer;
+  user-select: none;
+}
+
+[data-d2-readonly] .d2-preview {
+  cursor: default;
+}
+
+.d2-preview__svg {
+  text-align: center;
+}
+
+/* 与博客正文列同宽（约 46rem）：宽度由脚本按 viewBox 设置，这里只限制上限 */
+.d2-preview__svg > svg {
+  max-width: min(100%, 46rem);
+  height: auto;
+}
+
+html[data-theme-mode="dark"] .d2-preview__svg > svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.d2-preview__message {
+  margin: 0;
+  padding: 8px 12px;
+  white-space: pre-wrap;
+  font-family: var(--b3-font-family-code);
+  font-size: 13px;
+  color: var(--b3-theme-on-surface-light);
+}
+
+.d2-preview__message--error {
+  color: var(--b3-theme-error);
+}

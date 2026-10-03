@@ -1,0 +1,11 @@
+{
+  "clickToEdit": "Click to edit d2 source",
+  "toggle": "Toggle diagram / source",
+  "loading": "Rendering…",
+  "empty": "Empty d2 code block",
+  "engine": "Renderer",
+  "engineCLI": "Local d2 CLI (identical to the blog build)",
+  "engineWasm": "Bundled WASM (loads ~11MB on first render)",
+  "cliPath": "d2 CLI path",
+  "cliPathDesc": "Leave empty to search /opt/homebrew/bin, /usr/local/bin, ~/go/bin, etc."
+}

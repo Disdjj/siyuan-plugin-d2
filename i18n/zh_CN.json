@@ -1,0 +1,11 @@
+{
+  "clickToEdit": "点击编辑 d2 源码",
+  "toggle": "切换图 / 源码",
+  "loading": "正在渲染…",
+  "empty": "空的 d2 代码块",
+  "engine": "渲染方式",
+  "engineCLI": "本机 d2 命令（与博客构建完全一致）",
+  "engineWasm": "内置 WASM（首次渲染需加载约 11MB）",
+  "cliPath": "d2 命令路径",
+  "cliPathDesc": "留空时自动查找 /opt/homebrew/bin、/usr/local/bin、~/go/bin 等位置"
+}
