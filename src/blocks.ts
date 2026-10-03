@@ -50,8 +50,7 @@ export class BlockController {
   }
 
   /** 开始接管一个编辑器区域（.protyle-wysiwyg） */
-  attach(root: HTMLElement, readonly = false) {
-    root.toggleAttribute('data-d2-readonly', readonly);
+  attach(root: HTMLElement) {
     this.scan(root);
     if (this.observers.has(root)) return;
 
@@ -184,8 +183,9 @@ export class BlockController {
   private setMode(block: HTMLElement, mode: Mode) {
     const state = this.states.get(block);
     if (!state || state.preview.dataset.mode === mode) return;
-    // 只读文档不允许进入源码编辑
-    if (mode === 'source' && block.closest('[data-d2-readonly]')) return;
+    // 只读文档不允许进入源码编辑。只读状态可随时切换，每次实时判断：
+    // 思源进入只读时会把 .protyle-wysiwyg 设为 contenteditable=false（disabledWYSIWYG.ts）
+    if (mode === 'source' && isReadonly(block)) return;
 
     state.preview.dataset.mode = mode;
     if (mode === 'source') this.editing.add(block);
@@ -245,6 +245,10 @@ export class BlockController {
       state.preview.replaceChildren(message(String((error as Error).message || error), 'error'));
     }
   }
+}
+
+function isReadonly(block: HTMLElement): boolean {
+  return block.closest('.protyle-wysiwyg')?.getAttribute('contenteditable') === 'false';
 }
 
 function languageOf(block: HTMLElement): string {

@@ -24,7 +24,7 @@
   user-select: none;
 }
 
-[data-d2-readonly] .d2-preview {
+.protyle-wysiwyg[contenteditable="false"] .d2-preview {
   cursor: default;
 }
 

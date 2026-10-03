@@ -64,9 +64,8 @@ export default class D2Plugin extends Plugin {
   }
 
   private onProtyle = ({ detail }: CustomEvent<{ protyle: IProtyle }>) => {
-    const { protyle } = detail;
-    const root = protyle?.wysiwyg?.element;
-    if (root) this.blocks.attach(root, Boolean(protyle.disabled));
+    const root = detail.protyle?.wysiwyg?.element;
+    if (root) this.blocks.attach(root);
   };
 
   private onDestroyProtyle = ({ detail }: CustomEvent<{ protyle: IProtyle }>) => {
